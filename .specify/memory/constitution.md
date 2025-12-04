@@ -1,55 +1,65 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Version change:  → 1.0.0
+List of modified principles: (initial creation)
+Added sections: VII. Deployment Ready
+Removed sections: (none)
+Templates requiring updates:
+- .specify/templates/plan-template.md ⚠ pending
+- .specify/templates/spec-template.md ⚠ pending
+- .specify/templates/tasks-template.md ⚠ pending
+- .specify/commands/sp.adr.toml ⚠ pending (check for CLAUDE)
+- .specify/commands/sp.analyze.toml ⚠ pending (check for CLAUDE)
+- .specify/commands/sp.checklist.toml ⚠ pending (check for CLAUDE)
+- .specify/commands/sp.clarify.toml ⚠ pending (check for CLAUDE)
+- .specify/commands/sp.constitution.toml ⚠ pending (check for CLAUDE)
+- .specify/commands/sp.git.commit_pr.toml ⚠ pending (check for CLAUDE)
+- .specify/commands/sp.implement.toml ⚠ pending (check for CLAUDE)
+- .specify/commands/sp.phr.toml ⚠ pending (check for CLAUDE)
+- .specify/commands/sp.plan.toml ⚠ pending (check for CLAUDE)
+- .specify/commands/sp.specify.toml ⚠ pending (check for CLAUDE)
+- .specify/commands/sp.tasks.toml ⚠ pending (check for CLAUDE)
+- README.md ⚠ pending (if exists)
+- docs/quickstart.md ⚠ pending (if exists)
+Follow-up TODOs:
+- Manually check all listed templates and documentation files for consistency with new constitution.
+-->
+# Physical AI & Humanoid Robotics Textbook Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Docusaurus-Centric Development
+Requires using Docusaurus as the primary framework for the textbook, following Docusaurus file structure and conventions, utilizing Docusaurus theming and customization, implementing Docusaurus plugins for enhanced features, and optimizing for Docusaurus build and deployment.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Technical Accuracy First
+Ensures all robotics/AI concepts must be factually correct, code examples must be tested and runnable, and references must point to actual ROS 2, Gazebo, Isaac, and VLA tools.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Educational Design
+Defines that each chapter must follow the structure Objectives → Theory → Examples → Exercises → Summary, with a progressive learning path from beginner to advanced and inclusion of real-world applications and case studies.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Code Quality Standards
+Requires TypeScript for type safety, modular React components, proper error handling, and comprehensive comments.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. UI/UX Excellence
+Includes smooth animations such as page transitions and hover effects, a professional academic aesthetic, mobile-responsive design, and accessibility aligned with WCAG 2.1.
 
-### [PRINCIPLE_6_NAME]
+### VI. Chatbot Requirements
+Specifies two modes: Full book query and Selected text query, with fast response time under 2 seconds, clear source attribution, and a user-friendly interface.
 
+### VII. Deployment Ready
+Includes Vercel deployment configuration, environment variable management, performance optimized to achieve Lighthouse scores above 90, and SEO friendly structure.
 
-[PRINCIPLE__DESCRIPTION]
+## Architectural Guidelines
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+This section outlines architectural considerations and constraints.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+## Development Workflow
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
-
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+This section describes the standard development practices and processes.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution outlines the fundamental principles guiding the development of the "Physical AI & Humanoid Robotics Textbook". Any amendments to this constitution require careful consideration and discussion among the project stakeholders. The project will adhere to a continuous improvement model, with regular reviews of these principles to ensure ongoing relevance and effectiveness.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2025-12-04 | **Last Amended**: 2025-12-04
+
+
