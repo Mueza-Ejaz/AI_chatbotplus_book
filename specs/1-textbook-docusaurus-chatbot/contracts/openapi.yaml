@@ -1,0 +1,135 @@
+openapi: 3.0.0
+info:
+  title: Physical AI & Humanoid Robotics Textbook Chatbot API
+  version: 1.0.0
+  description: API for the textbook chatbot backend, handling queries and content ingestion.
+servers:
+  - url: /api
+    description: Base URL for the chatbot API
+tags:
+  - name: Chatbot
+    description: Operations related to the AI chatbot
+  - name: Ingestion
+    description: Operations for ingesting textbook content
+  - name: Health
+    description: Health check endpoint
+
+paths:
+  /chat:
+    post:
+      summary: Send a query to the chatbot
+      operationId: postChatQuery
+      tags:
+        - Chatbot
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - query
+                - mode
+              properties:
+                query:
+                  type: string
+                  description: The user's question for the chatbot.
+                mode:
+                  type: string
+                  enum: [ "full_book", "selected_text" ]
+                  description: The query mode (full book or selected text).
+                selected_text:
+                  type: string
+                  nullable: true
+                  description: Optional. The text selected by the user, required if mode is 'selected_text'.
+      responses:
+        '200':
+          description: Successful response from the chatbot.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: string
+                    description: The chatbot's answer.
+                  sources:
+                    type: array
+                    items:
+                      type: string
+                    description: List of references from the textbook for the answer.
+        '400':
+          description: Bad Request - Invalid input or missing selected_text for 'selected_text' mode.
+        '500':
+          description: Internal Server Error - Issues with Qdrant, Gemini API, etc.
+
+  /ingest:
+    post:
+      summary: Ingest textbook content for the chatbot
+      operationId: postIngestContent
+      tags:
+        - Ingestion
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - content_id
+                - text_content
+                - metadata
+              properties:
+                content_id:
+                  type: string
+                  description: Unique ID for the content being ingested (e.g., chapter ID).
+                text_content:
+                  type: string
+                  description: The text content to be embedded and stored.
+                metadata:
+                  type: object
+                  additionalProperties: true
+                  description: Any associated metadata (e.g., chapter title, module, page number).
+      responses:
+        '200':
+          description: Content ingested successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [ "success", "failure" ]
+                    description: Status of the ingestion.
+                  message:
+                    type: string
+                    description: Details about the ingestion process.
+        '400':
+          description: Bad Request - Invalid input.
+        '500':
+          description: Internal Server Error - Issues with Qdrant or embedding generation.
+
+  /health:
+    get:
+      summary: Check health of the chatbot backend
+      operationId: getHealth
+      tags:
+        - Health
+      responses:
+        '200':
+          description: Service is healthy.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [ "ok", "error" ]
+                    description: Health status of the service.
+                  message:
+                    type: string
+                    description: Optional details about the health status.
+        '500':
+          description: Internal Server Error - Service is unhealthy.

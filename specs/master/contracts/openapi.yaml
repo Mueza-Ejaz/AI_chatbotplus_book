@@ -1,0 +1,72 @@
+openapi: 3.0.0
+info:
+  title: Chatbot API
+  version: 1.0.0
+  description: API for interacting with the Physical AI & Humanoid Robotics Textbook chatbot.
+
+paths:
+  /chat:
+    post:
+      summary: Get a response from the chatbot.
+      description: Sends a user query or selected text to the chatbot and receives a generated response with sources.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                  description: The user's query for the chatbot (used in full book mode).
+                  example: "What is the history of AI?"
+                selected_text:
+                  type: string
+                  nullable: true
+                  description: Optional. Text selected by the user to be processed by the chatbot (used in selected text mode).
+                  example: "Artificial intelligence (AI) has a long history..."
+              oneOf:
+                - required: [query]
+                - required: [selected_text]
+              example:
+                query: "Explain the concept of reinforcement learning."
+      responses:
+        '200':
+          description: Successful response from the chatbot.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: string
+                    description: The chatbot's generated response.
+                    example: "Reinforcement learning is an area of machine learning..."
+                  sources:
+                    type: array
+                    items:
+                      type: string
+                    description: A list of sources (e.g., chapter titles or identifiers) used to generate the response.
+                    example:
+                      - "Module 2, Chapter 5: Reinforcement Learning Basics"
+                      - "Module 2, Chapter 6: Advanced RL Techniques"
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: "Either 'query' or 'selected_text' must be provided."
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: "An unexpected error occurred on the server."
