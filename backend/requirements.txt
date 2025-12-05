@@ -1,2 +1,7 @@
 fastapi==0.104.0
 uvicorn==0.23.2
+pytest==9.0.1
+httpx==0.28.1
+python-frontmatter==1.0.0 # Specify a version or leave flexible if not critical
+qdrant-client==1.16.1 # Specify a version or leave flexible if not critical
+google-generativeai==0.7.0 # Specify a version or leave flexible if not critical

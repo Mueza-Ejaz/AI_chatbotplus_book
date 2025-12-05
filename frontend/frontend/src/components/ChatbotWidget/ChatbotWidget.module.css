@@ -1,0 +1,162 @@
+.chatbotContainer {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.chatToggleButton {
+    background-color: var(--ifm-color-primary);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 15px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.chatToggleButton:hover {
+    background-color: var(--ifm-color-primary-dark);
+}
+
+.chatWindow {
+    width: 350px;
+    height: 500px;
+    background-color: var(--ifm-background-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin-bottom: 10px; /* Space between window and toggle button */
+}
+
+.chatHeader {
+    background-color: var(--ifm-color-primary);
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+}
+
+.chatHeader h3 {
+    margin: 0;
+    color: white; /* Ensure text is white against primary color */
+}
+
+.modeToggle {
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.modeToggle button {
+    background: none;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 14px;
+}
+
+.modeToggle button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.modeToggle button.activeMode {
+    background-color: white;
+    color: var(--ifm-color-primary);
+}
+
+.clearHistoryButton, .exportButton { /* Apply common styles to both buttons */
+    background: none;
+    border: 1px solid white;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.clearHistoryButton:hover, .exportButton:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.closeButton {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.chatMessages {
+    flex-grow: 1;
+    padding: 15px;
+    overflow-y: auto;
+    background-color: var(--ifm-background-surface-color); /* Lighter background for messages */
+    border-bottom: 1px solid var(--ifm-color-emphasis-200);
+    display: flex; /* Enable flexbox for message alignment */
+    flex-direction: column; /* Stack messages vertically */
+}
+
+/* Specific styles for chat messages */
+.messageBubble {
+    padding: 8px 12px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+.botMessage {
+    background-color: var(--ifm-background-color);
+    color: var(--ifm-font-color-base);
+    align-self: flex-start;
+    border-bottom-left-radius: 2px;
+}
+
+.userMessage {
+    background-color: var(--ifm-color-primary-lightest);
+    color: white;
+    align-self: flex-end;
+    margin-left: auto; /* Push user message to the right */
+    border-bottom-right-radius: 2px;
+}
+
+.messageSources {
+    font-size: 0.75em;
+    color: var(--ifm-color-emphasis-600);
+    margin-top: 5px;
+}
+
+@media (max-width: 768px) {
+    .chatbotContainer {
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .chatWindow {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        margin-bottom: 0;
+    }
+
+    .chatToggleButton {
+        bottom: 20px;
+        right: 20px;
+        position: fixed; /* Ensure it stays floating even when window is full screen */
+    }
+}
+

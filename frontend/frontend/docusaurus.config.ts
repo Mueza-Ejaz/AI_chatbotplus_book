@@ -4,7 +4,8 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
-title: 'Physical AI & Humanoid Robotics Textbook',
+const config: Config = {
+  title: 'Physical AI & Humanoid Robotics Textbook',
   tagline: 'Explore the convergence of AI and Robotics',
   favicon: 'img/favicon.ico',
 
