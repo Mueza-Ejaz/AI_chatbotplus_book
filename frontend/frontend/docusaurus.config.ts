@@ -67,6 +67,18 @@ const config: Config = {
       } satisfies Preset.Options,
     ],
   ],
+  // Add webpack configuration to handle TypeScript files properly
+  webpack: {
+    jsLoader: (isClient) => ({
+      loader: require.resolve('babel-loader'),
+      options: {
+        presets: isClient ? [require.resolve('@docusaurus/core/lib/babel/preset')] : [
+          require.resolve('@babel/preset-typescript'),
+          [require.resolve('@babel/preset-react'), { runtime: 'automatic' }],
+        ],
+      },
+    }),
+  },
 
   themeConfig: {
     // Replace with your project's social card
