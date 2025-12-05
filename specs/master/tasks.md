@@ -31,7 +31,7 @@ The implementation will follow an MVP-first approach, prioritizing core textbook
 
 *Goal*: Establish the basic project structure and development environment for both frontend and backend.
 
--   [ ] T001 Create root `frontend/` and `backend/` directories.
+- [x] T001 Create root `frontend/` and `backend/` directories.
 -   [ ] T002 Initialize Docusaurus project within `frontend/` directory, including `frontend/docusaurus.config.ts`, `frontend/src/`, and `frontend/docs/`.
 -   [ ] T003 Configure `tsconfig.json` for TypeScript in `frontend/`.
 -   [ ] T004 Initialize FastAPI project within `backend/` directory, including `backend/src/main.py` and `backend/requirements.txt`.
