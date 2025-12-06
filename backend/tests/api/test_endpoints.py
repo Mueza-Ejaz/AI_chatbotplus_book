@@ -1,27 +1,33 @@
 import pytest
 from httpx import AsyncClient
 from unittest.mock import AsyncMock, patch
-from backend.main import app # Import the main FastAPI app
-from backend.src.models.chat import ChatRequest, ChatResponse, ChatMode
-from backend.src.models.ingest import IngestRequest, IngestResponse, IngestionStatus
 
-# Fixture for FastAPI TestClient
-@pytest.fixture
-async def async_client():
-    async with AsyncClient(app=app, base_url="http://test") as client:
-        yield client
+from main import app
+from src.api.chat import get_chatbot_service # Import the dependency function
+from src.api.ingest import get_ingestion_service # Import the dependency function for IngestionService
+from src.models.chat import ChatRequest, ChatResponse, ChatMode
+from src.models.ingest import IngestRequest, IngestResponse, IngestionStatus
+from src.services.chatbot_service import ChatbotService # Import for spec
+from src.services.ingestion_service import IngestionService # Import for spec
 
-# Mock for ChatbotService.process_query
+# Mock for ChatbotService
 @pytest.fixture
 def mock_chatbot_service():
-    with patch('backend.src.api.chat.chatbot_service', new_callable=AsyncMock) as mock:
-        yield mock
+    return AsyncMock(spec=ChatbotService)
 
-# Mock for IngestionService.process_document
+# Mock for IngestionService
 @pytest.fixture
 def mock_ingestion_service():
-    with patch('backend.src.api.ingest.ingestion_service', new_callable=AsyncMock) as mock:
-        yield mock
+    return AsyncMock(spec=IngestionService)
+
+# Fixture for FastAPI TestClient with dependency override
+@pytest.fixture
+async def async_client(mock_chatbot_service, mock_ingestion_service):
+    app.dependency_overrides[get_chatbot_service] = lambda: mock_chatbot_service
+    app.dependency_overrides[get_ingestion_service] = lambda: mock_ingestion_service # Override IngestionService
+    async with AsyncClient(app=app, base_url="http://test") as client:
+        yield client
+    app.dependency_overrides = {} # Clean up overrides after test
 
 @pytest.mark.asyncio
 async def test_post_chat_query_full_book_success(async_client, mock_chatbot_service):

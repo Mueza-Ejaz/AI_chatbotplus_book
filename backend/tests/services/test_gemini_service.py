@@ -1,6 +1,6 @@
 import pytest
 from unittest.mock import MagicMock, patch
-from backend.src.services.gemini_service import GeminiService
+from src.services.gemini_service import GeminiService
 import os
 
 @pytest.fixture

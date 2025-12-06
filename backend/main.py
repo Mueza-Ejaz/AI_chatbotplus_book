@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from backend.src.api import health, chat, ingest
+from src.api import health, chat, ingest
 
 app = FastAPI()
 

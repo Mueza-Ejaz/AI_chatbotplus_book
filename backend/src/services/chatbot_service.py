@@ -1,9 +1,9 @@
-import os
 from typing import List, Dict, Any
+import os
 
-from backend.src.services.qdrant_service import QdrantClientService
-from backend.src.services.gemini_service import GeminiService
-from backend.src.models.chat import ChatRequest, ChatResponse, ChatMode
+from .qdrant_service import QdrantClientService
+from .gemini_service import GeminiService
+from ..models.chat import ChatRequest, ChatResponse, ChatMode
 
 class ChatbotService:
     def __init__(self):
@@ -86,11 +86,11 @@ class ChatbotService:
 
 # Example usage (for testing purposes, requires Qdrant and Gemini setup)
 if __name__ == "__main__":
-    os.environ["QDRANT_URL"] = "http://localhost:6333"
-    os.environ["QDRANT_API_KEY"] = "YOUR_QDRANT_API_KEY"
-    os.environ["GEMINI_API_KEY"] = "YOUR_GEMINI_API_KEY"
+    os.environ["QDRANT_URL"] = "https://3dcdb2f0-31ac-4923-bca9-3983d7a84ce8.us-east4-0.gcp.cloud.qdrant.io"
+    os.environ["QDRANT_API_KEY"] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.CgfIehm405nwmJv-XvhqrQFx2xATwurzYhJhrykOh9U"
+    os.environ["GEMINI_API_KEY"] = "AIzaSyCYktNxdWlPAtw2kjYRxTdcQ7HmCt5KiDs"
     os.environ["QDRANT_COLLECTION_NAME"] = "test_textbook_chapters"
-    os.environ["EMBEDDING_SIZE"] = "768" # Ensure this matches your Gemini embedding model output size
+    os.environ["EMBEDDING_SIZE"] = "768" 
 
     # Dummy Qdrant client service (replace with actual QdrantClientService for real test)
     class MockQdrantClientService:
@@ -139,3 +139,5 @@ if __name__ == "__main__":
     chat_response_missing_text = chatbot_service.process_query(chat_request_missing_text)
     print("Response:", chat_response_missing_text.response)
     print("Sources:", chat_response_missing_text.sources)
+
+

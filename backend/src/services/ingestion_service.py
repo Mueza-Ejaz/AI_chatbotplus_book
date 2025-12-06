@@ -1,9 +1,9 @@
 from typing import Dict, Any, List
 import os
 
-from backend.src.services.gemini_service import GeminiService
-from backend.src.services.qdrant_service import QdrantClientService
-from backend.src.models.ingest import IngestRequest, IngestResponse, IngestionStatus
+from .gemini_service import GeminiService
+from .qdrant_service import QdrantClientService
+from ..models.ingest import IngestRequest, IngestResponse, IngestionStatus
 
 class IngestionService:
     def __init__(self):

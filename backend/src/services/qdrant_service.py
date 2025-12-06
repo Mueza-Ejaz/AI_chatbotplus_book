@@ -6,7 +6,6 @@ class QdrantClientService:
     def __init__(self):
         self.qdrant_url = os.getenv("QDRANT_URL")
         self.qdrant_api_key = os.getenv("QDRANT_API_KEY")
-
         if not self.qdrant_url or not self.qdrant_api_key:
             raise ValueError("QDRANT_URL and QDRANT_API_KEY environment variables must be set.")
 
@@ -60,8 +59,8 @@ class QdrantClientService:
 if __name__ == "__main__":
     # This block is for testing the service independently
     # Set dummy environment variables for local testing (replace with your actual values)
-    os.environ["QDRANT_URL"] = "http://localhost:6333" # Or your Qdrant Cloud URL
-    os.environ["QDRANT_API_KEY"] = "your_api_key" # Or your Qdrant Cloud API key
+    os.environ["QDRANT_URL"] = "https://3dcdb2f0-31ac-4923-bca9-3983d7a84ce8.us-east4-0.gcp.cloud.qdrant.io" # Or your Qdrant Cloud URL
+    os.environ["QDRANT_API_KEY"] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.CgfIehm405nwmJv-XvhqrQFx2xATwurzYhJhrykOh9U" # Or your Qdrant Cloud API key
 
     qdrant_service = QdrantClientService()
     collection_name = "test_collection"
@@ -82,3 +81,6 @@ if __name__ == "__main__":
         print(f"Error: {e}")
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
+
+
+        
