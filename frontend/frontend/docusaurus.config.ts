@@ -86,7 +86,7 @@ const config: Config = {
         },
         {to: '/about', label: 'About', position: 'left'},
         {
-          href: 'https://github.com/gemini-cli/ai-robotics-textbook',
+          href: 'https://github.com/Mueza-Ejaz',
           label: 'GitHub',
           position: 'right',
         },
@@ -127,7 +127,7 @@ const config: Config = {
 
             {
               label: 'GitHub',
-              href: 'https://github.com/gemini-cli/ai-robotics-textbook',
+              href: 'https://github.com/Mueza-Ejaz',
             },
           ],
         },
