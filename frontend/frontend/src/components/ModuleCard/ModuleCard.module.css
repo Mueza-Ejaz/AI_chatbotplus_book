@@ -17,20 +17,21 @@
 }
 
 .cardHeader {
-    background-color: var(--ifm-color-primary-dark);
-    color: white;
+    background-color: var(--ifm-background-surface-color); /* Lighter background */
+    color: var(--ifm-color-primary); /* Use primary color for text */
     padding: 15px;
     font-size: 1.2em;
     font-weight: bold;
     display: flex; /* For icon alignment */
     align-items: center; /* For icon alignment */
+    border-bottom: 1px solid var(--ifm-color-emphasis-200); /* Add a subtle border */
 }
 
 .cardIcon {
     width: 30px; /* Adjust size as needed */
     height: 30px;
     margin-right: 10px;
-    filter: invert(1); /* Example: invert color for dark background */
+    filter: none; /* Remove filter as background is lighter */
 }
 
 @media screen and (max-width: 768px) {
@@ -41,7 +42,7 @@
 }
 
 .cardHeader h3 {
-    color: white;
+    color: var(--ifm-color-primary); /* Use primary color for text */
     margin: 0;
 }
 

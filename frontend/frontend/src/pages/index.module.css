@@ -8,8 +8,13 @@
   text-align: center;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(180deg, #260c49 0%, #0a041f 100%); /* Subtle dark gradient */
-  color: white; /* Ensure text is visible on hero background */
+  background: linear-gradient(180deg, #e0f2f2 0%, #ffffff 100%); /* Light teal gradient */
+  color: var(--ifm-font-color-base); /* Ensure text is visible on hero background */
+}
+
+.heroBanner > .container {
+  position: relative; /* Ensure content is above pseudo-element */
+  z-index: 1;
 }
 
 @media screen and (max-width: 996px) {
@@ -23,7 +28,7 @@
   line-height: 1.1;
   font-weight: 800;
   margin-bottom: 1rem;
-  background: linear-gradient(90deg, #a8ff78, #78ffd6); /* Gradient effect */
+  background: linear-gradient(90deg, var(--ifm-color-primary-lightest), var(--ifm-color-primary)); /* Gradient effect using new primary color */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: neonGlow 1.5s ease-in-out infinite alternate; /* Neon glow animation */
@@ -43,10 +48,10 @@
 
 @keyframes neonGlow {
   from {
-    text-shadow: 0 0 5px #a8ff78, 0 0 10px #78ffd6;
+    text-shadow: 0 0 5px var(--ifm-color-primary-light), 0 0 10px var(--ifm-color-primary);
   }
   to {
-    text-shadow: 0 0 10px #a8ff78, 0 0 20px #78ffd6, 0 0 30px #a8ff78;
+    text-shadow: 0 0 10px var(--ifm-color-primary-light), 0 0 20px var(--ifm-color-primary), 0 0 30px var(--ifm-color-primary);
   }
 }
 
@@ -55,7 +60,7 @@
   line-height: 1.4;
   max-width: 800px;
   margin: 0 auto 2rem auto;
-  color: #e0e0e0; /* Lighter subtitle color */
+  color: var(--ifm-font-color-base); /* Use base font color for light theme */
 }
 
 @media screen and (max-width: 768px) {

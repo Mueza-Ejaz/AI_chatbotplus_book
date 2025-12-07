@@ -35,7 +35,10 @@ function HomepageHeader() {
           initial="hidden"
           animate="visible"
         >
-          <motion.h1 variants={itemVariants} className="hero__title">
+          <motion.h1
+            variants={itemVariants}
+            className="hero__title"
+          >
             Physical AI & Humanoid Robotics
           </motion.h1>
           <motion.p variants={itemVariants} className="hero__subtitle">
@@ -172,7 +175,7 @@ export default function Home(): ReactNode {
               Familiarity with robotics concepts is a plus but not strictly required.
             </p>
             <p className={styles.aboutText}>
-              **Instructor:** [Instructor Name/Team Name]
+              **Instructor:** Mueza Ejaz
             </p>
             <div className={styles.aboutLinks}>
               <Link
