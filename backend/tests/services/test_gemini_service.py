@@ -20,15 +20,15 @@ def mock_genai_generative_model():
 
 @pytest.fixture
 def gemini_service(mock_genai_configure, mock_genai_generative_model):
-    with patch.dict(os.environ, {'GEMINI_API_KEY': 'test_gemini_key'}):
+    with patch.dict(os.environ, {'GEMINI_API_KEY': 'AIzaSyCYktNxdWlPAtw2kjYRxTdcQ7HmCt5KiDs'}):
         service = GeminiService()
         yield service
 
 def test_gemini_service_init_success(mock_genai_configure, mock_genai_generative_model):
-    with patch.dict(os.environ, {'GEMINI_API_KEY': 'test_gemini_key'}):
+    with patch.dict(os.environ, {'GEMINI_API_KEY': 'AIzaSyCYktNxdWlPAtw2kjYRxTdcQ7HmCt5KiDs'}):
         service = GeminiService()
-        mock_genai_configure.assert_called_once_with(api_key='test_gemini_key')
-        mock_genai_generative_model.assert_called_once_with('gemini-pro')
+        mock_genai_configure.assert_called_once_with(api_key='AIzaSyCYktNxdWlPAtw2kjYRxTdcQ7HmCt5KiDs')
+        mock_genai_generative_model.assert_called_once_with('gemini-flash-2.5')
         assert service.model_chat == mock_genai_generative_model.return_value
         assert service.model_embedding == 'models/embedding-001'
 
@@ -73,3 +73,6 @@ def test_generate_content_with_context(gemini_service, mock_genai_generative_mod
     gemini_service.model_chat.start_chat.assert_called_once_with(history=test_history)
     mock_chat_session.send_message.assert_called_once_with(test_prompt)
     assert response == "mocked chat response with context"
+
+
+
