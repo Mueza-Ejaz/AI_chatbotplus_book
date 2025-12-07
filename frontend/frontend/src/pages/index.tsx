@@ -64,6 +64,11 @@ export default function Home(): ReactNode {
     visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
   };
 
+  const sectionVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
+
   const statCardVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
@@ -76,82 +81,130 @@ export default function Home(): ReactNode {
       description="A Docusaurus-powered textbook on Physical AI & Humanoid Robotics.">
       <HomepageHeader />
       <main>
-        <section className={styles.moduleCardsSection}>
+        <motion.section
+          className={styles.moduleCardsSection}
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+        >
           <div className="container">
             <Heading as="h2">Modules</Heading>
             <div className="row">
               <motion.div
                 className="col col--6 margin-bottom--lg"
                 variants={moduleCardVariants}
-                initial="hidden"
-                animate="visible"
                 viewport={{ once: true }}
               >
                 <ModuleCard
                   title="Module 1: ROS 2"
                   description="The Robotic Nervous System (ROS 2 Architecture & Core Concepts, Nodes, Topics, Services, URDF for Humanoid Robots)"
                   link="/docs/module-1/chapter-1"
+                  icon="/img/icons/ros2.svg" // Placeholder icon
                   delay={0}
                 />
               </motion.div>
               <motion.div
                 className="col col--6 margin-bottom--lg"
                 variants={moduleCardVariants}
-                initial="hidden"
-                animate="visible"
                 viewport={{ once: true }}
               >
                 <ModuleCard
                   title="Module 2: Digital Twin"
                   description="Gazebo & Unity Simulation (Gazebo Physics, Unity High-Fidelity Rendering, Sensor Simulation)"
                   link="/docs/module-2/chapter-4"
+                  icon="/img/icons/digital_twin.svg" // Placeholder icon
                   delay={0.1}
                 />
               </motion.div>
               <motion.div
                 className="col col--6 margin-bottom--lg"
                 variants={moduleCardVariants}
-                initial="hidden"
-                animate="visible"
                 viewport={{ once: true }}
               >
                 <ModuleCard
                   title="Module 3: AI-Robot Brain"
                   description="NVIDIA Isaac (Isaac Sim for Training, Isaac ROS for Perception, Nav2 for Bipedal Navigation)"
                   link="/docs/module-3/chapter-7"
+                  icon="/img/icons/ai_robot_brain.svg" // Placeholder icon
                   delay={0.2}
                 />
               </motion.div>
               <motion.div
                 className="col col--6 margin-bottom--lg"
                 variants={moduleCardVariants}
-                initial="hidden"
-                animate="visible"
                 viewport={{ once: true }}
               >
                 <ModuleCard
                   title="Module 4: VLA"
                   description="Vision-Language-Action (Whisper for Voice Commands, LLMs for Planning, Autonomous Humanoid Capstone)"
                   link="/docs/module-4/chapter-10"
+                  icon="/img/icons/vla.svg" // Placeholder icon
                   delay={0.3}
                 />
               </motion.div>
             </div>
           </div>
-        </section>
+        </motion.section>
 
-        <section className={styles.aboutSection}>
+        <motion.section
+          className={styles.aboutSection}
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+        >
           <div className="container">
             <Heading as="h2">About the Course</Heading>
-            {/* Placeholder for About Section Content */}
-            <p>
-              (This section will provide an overview of the course, hardware requirements,
-              prerequisites, instructor info, GitHub repo link, and MIT License details.)
+            <p className={styles.aboutText}>
+              The "Physical AI & Humanoid Robotics" textbook provides a comprehensive guide to understanding
+              and implementing intelligent robotic systems. This course delves into the convergence of
+              Artificial Intelligence and advanced robotics, with a special focus on humanoid platforms.
+              You will learn how to integrate cutting-edge technologies like ROS 2, Gazebo, Unity,
+              NVIDIA Isaac, and Large Language Models (LLMs) to build and control sophisticated humanoid robots.
             </p>
+            <p className={styles.aboutText}>
+              **Hardware Requirements:** A modern computer with a dedicated NVIDIA GPU (RTX 20 series or newer recommended)
+              for accelerated simulation and AI workloads.
+            </p>
+            <p className={styles.aboutText}>
+              **Prerequisites:** Basic understanding of Python programming, linear algebra, and calculus.
+              Familiarity with robotics concepts is a plus but not strictly required.
+            </p>
+            <p className={styles.aboutText}>
+              **Instructor:** [Instructor Name/Team Name]
+            </p>
+            <div className={styles.aboutLinks}>
+              <Link
+                className={clsx('button button--primary button--lg', styles.aboutButton)}
+                to="/docs/intro">
+                Tutorial
+              </Link>
+              <Link
+                className={clsx('button button--info button--lg', styles.aboutButton)}
+                to="https://www.linkedin.com/in/mueza-ejaz086" // Updated LinkedIn
+                target="_blank"
+                rel="noopener noreferrer">
+                LinkedIn
+              </Link>
+              <Link
+                className={clsx('button button--secondary button--lg', styles.aboutButton)}
+                to="https://github.com/Mueza-Ejaz" // Updated GitHub repo
+                target="_blank"
+                rel="noopener noreferrer">
+                GitHub
+              </Link>
+            </div>
           </div>
-        </section>
+        </motion.section>
 
-        <section className={styles.quickStatsSection}>
+        <motion.section
+          className={styles.quickStatsSection}
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+        >
           <div className="container">
             <Heading as="h2">Quick Stats</Heading>
             <div className="row">
@@ -162,7 +215,7 @@ export default function Home(): ReactNode {
                 animate="visible"
                 viewport={{ once: true }}
               >
-                <div className="card">
+                <div className={clsx('card', styles.statCard)}>
                   <div className="card__body">
                     <h3>Modules</h3>
                     <p>4</p>
@@ -176,7 +229,7 @@ export default function Home(): ReactNode {
                 animate="visible"
                 viewport={{ once: true, amount: 0.5 }}
               >
-                <div className="card">
+                <div className={clsx('card', styles.statCard)}>
                   <div className="card__body">
                     <h3>Chapters</h3>
                     <p>12</p>
@@ -190,7 +243,7 @@ export default function Home(): ReactNode {
                 animate="visible"
                 viewport={{ once: true, amount: 0.8 }}
               >
-                <div className="card">
+                <div className={clsx('card', styles.statCard)}>
                   <div className="card__body">
                     <h3>Practice</h3>
                     <p>Hands-on Exercises</p>
@@ -199,7 +252,7 @@ export default function Home(): ReactNode {
               </motion.div>
             </div>
           </div>
-        </section>
+        </motion.section>
       </main>
     </Layout>
   );

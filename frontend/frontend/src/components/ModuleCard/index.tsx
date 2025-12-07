@@ -6,13 +6,15 @@ interface ModuleCardProps {
   title: string;
   description: string;
   link: string;
+  icon: string; // Add icon prop
   delay: number; // For animation stagger
 }
 
-const ModuleCard: React.FC<ModuleCardProps> = ({ title, description, link, delay }) => {
+const ModuleCard: React.FC<ModuleCardProps> = ({ title, description, link, icon, delay }) => {
   return (
     <div className={styles.moduleCard} style={{ animationDelay: `${delay}s` }}>
       <div className={styles.cardHeader}>
+        {icon && <img src={icon} alt={`${title} icon`} className={styles.cardIcon} />} {/* Render icon */}
         <h3>{title}</h3>
       </div>
       <div className={styles.cardBody}>

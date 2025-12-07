@@ -1,162 +1,332 @@
 .chatbotContainer {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
 }
 
 .chatToggleButton {
-    background-color: var(--ifm-color-primary);
-    color: white;
-    border: none;
-    border-radius: 50px;
-    padding: 15px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease;
+  background-color: var(--ifm-color-primary);
+  color: white;
+  border: none;
+  border-radius: 50%; /* Make it circular */
+  width: 60px; /* Fixed width */
+  height: 60px; /* Fixed height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0; /* Hide text, only show icon */
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  position: fixed; /* Ensure it stays floating */
+  bottom: 20px;
+  right: 20px;
+  z-index: 1001; /* Above chat window when open */
 }
 
 .chatToggleButton:hover {
-    background-color: var(--ifm-color-primary-dark);
+  background-color: var(--ifm-color-primary-dark);
+  transform: translateY(-2px);
+}
+
+.chatToggleButtonOpen {
+  transform: rotate(180deg); /* Rotate X icon when open */
+}
+
+.openIcon, .closeIcon {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
 }
 
 .chatWindow {
-    width: 350px;
-    height: 500px;
-    background-color: var(--ifm-background-color);
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    margin-bottom: 10px; /* Space between window and toggle button */
+  position: fixed;
+  bottom: 90px; /* Above the toggle button */
+  right: 20px;
+  width: 380px;
+  height: 500px;
+  background-color: var(--ifm-background-color);
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1000;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+  transform: scale(1);
+  opacity: 1;
+  transform-origin: bottom right; /* For scaling animation */
+}
+
+/* Close animation */
+.chatWindow[data-is-open='false'] {
+  transform: scale(0.8);
+  opacity: 0;
+  pointer-events: none; /* Disable interaction when hidden */
 }
 
 .chatHeader {
-    background-color: var(--ifm-color-primary);
-    color: white;
-    padding: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 18px;
+  background-color: var(--ifm-color-primary);
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.1em;
+  border-bottom: 1px solid var(--ifm-color-primary-dark);
 }
 
 .chatHeader h3 {
-    margin: 0;
-    color: white; /* Ensure text is white against primary color */
-}
-
-.modeToggle {
-    display: flex;
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 5px;
-    overflow: hidden;
-}
-
-.modeToggle button {
-    background: none;
-    border: none;
-    color: white;
-    padding: 8px 12px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-size: 14px;
-}
-
-.modeToggle button:hover {
-    background-color: rgba(255, 255, 255, 0.3);
-}
-
-.modeToggle button.activeMode {
-    background-color: white;
-    color: var(--ifm-color-primary);
-}
-
-.clearHistoryButton, .exportButton { /* Apply common styles to both buttons */
-    background: none;
-    border: 1px solid white;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-left: 10px;
-    transition: background-color 0.3s ease;
-}
-
-.clearHistoryButton:hover, .exportButton:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+  margin: 0;
+  color: white;
+  font-weight: 600;
 }
 
 .closeButton {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.closeButton:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.closeButton .closeIcon {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.chatControls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  background-color: var(--ifm-background-surface-color); /* Lighter background for controls */
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  flex-wrap: wrap; /* Allow wrapping on small screens */
+  gap: 8px; /* Space between items */
+}
+
+.modeToggle {
+  display: flex;
+  border-radius: var(--ifm-border-radius);
+  overflow: hidden;
+  border: 1px solid var(--ifm-color-emphasis-300);
+}
+
+.controlButton {
+  background: none;
+  border: none;
+  color: var(--ifm-font-color-base);
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  font-size: 0.85em;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.modeToggle .controlButton {
+  border-radius: 0;
+  border-right: 1px solid var(--ifm-color-emphasis-300); /* Separator */
+}
+
+.modeToggle .controlButton:last-child {
+  border-right: none;
+}
+
+.modeToggle .controlButton:hover:not(.activeMode) {
+  background-color: var(--ifm-hover-background-color);
+}
+
+.modeToggle .controlButton.activeMode {
+  background-color: var(--ifm-color-primary);
+  color: white;
+  font-weight: 500;
+  border-color: var(--ifm-color-primary);
+}
+
+.actionButtons {
+  display: flex;
+  gap: 8px;
+}
+
+.actionButtons .controlButton {
+  background-color: var(--ifm-background-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: var(--ifm-border-radius);
+  color: var(--ifm-font-color-base);
+}
+
+.actionButtons .controlButton:hover {
+  background-color: var(--ifm-hover-background-color);
+  border-color: var(--ifm-color-primary);
+}
+
+.actionIcon {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
 }
 
 .chatMessages {
-    flex-grow: 1;
-    padding: 15px;
-    overflow-y: auto;
-    background-color: var(--ifm-background-surface-color); /* Lighter background for messages */
-    border-bottom: 1px solid var(--ifm-color-emphasis-200);
-    display: flex; /* Enable flexbox for message alignment */
-    flex-direction: column; /* Stack messages vertically */
+  flex-grow: 1;
+  padding: 15px 20px;
+  overflow-y: auto;
+  background-color: var(--ifm-background-color);
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Space between messages */
 }
 
-/* Specific styles for chat messages */
 .messageBubble {
-    padding: 8px 12px;
-    border-radius: 15px;
-    margin-bottom: 10px;
-    max-width: 80%;
-    word-wrap: break-word;
+  padding: 10px 15px;
+  border-radius: 18px; /* More rounded */
+  max-width: 85%;
+  word-wrap: break-word;
+  line-height: 1.4;
+  font-size: 0.95em;
+}
+
+.messageBubble p {
+  margin: 0;
 }
 
 .botMessage {
-    background-color: var(--ifm-background-color);
-    color: var(--ifm-font-color-base);
-    align-self: flex-start;
-    border-bottom-left-radius: 2px;
+  background-color: var(--ifm-background-surface-color);
+  color: var(--ifm-font-color-base);
+  align-self: flex-start;
+  border-bottom-left-radius: 4px; /* Pointed corner */
 }
 
 .userMessage {
-    background-color: var(--ifm-color-primary-lightest);
-    color: white;
-    align-self: flex-end;
-    margin-left: auto; /* Push user message to the right */
-    border-bottom-right-radius: 2px;
+  background-color: var(--ifm-color-primary-light);
+  color: white;
+  align-self: flex-end;
+  margin-left: auto;
+  border-bottom-right-radius: 4px; /* Pointed corner */
 }
 
 .messageSources {
-    font-size: 0.75em;
-    color: var(--ifm-color-emphasis-600);
-    margin-top: 5px;
+  font-size: 0.75em;
+  color: var(--ifm-color-emphasis-600);
+  margin-top: 8px;
+  word-break: break-all; /* Ensure long URLs break */
 }
 
+.chatInputArea {
+  display: flex;
+  padding: 10px 15px;
+  background-color: var(--ifm-background-surface-color);
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+  gap: 10px;
+}
+
+.chatInputField {
+  flex-grow: 1;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: var(--ifm-border-radius);
+  padding: 10px 15px;
+  font-size: 1em;
+  background-color: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.chatInputField:focus {
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 0 0 2px var(--ifm-color-primary-lighter);
+  outline: none;
+}
+
+.chatInputField::placeholder {
+  color: var(--ifm-font-color-secondary);
+}
+
+.sendButton {
+  background-color: var(--ifm-color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--ifm-border-radius);
+  padding: 10px 15px;
+  font-size: 1em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.sendButton:hover:not(:disabled) {
+  background-color: var(--ifm-color-primary-dark);
+  transform: translateY(-1px);
+}
+
+.sendButton:disabled {
+  background-color: var(--ifm-color-emphasis-400);
+  cursor: not-allowed;
+}
+
+.sendIcon {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  transform: rotate(90deg); /* Pointing upwards */
+}
+
+/* Responsive adjustments for mobile */
 @media (max-width: 768px) {
-    .chatbotContainer {
-        bottom: 0;
-        right: 0;
-        width: 100%;
-        height: 100%;
-    }
+  .chatWindow {
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    transform: scale(1); /* No scaling on mobile full screen */
+    opacity: 1;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out; /* Add transition for mobile too */
+  }
 
-    .chatWindow {
-        width: 100%;
-        height: 100%;
-        border-radius: 0;
-        margin-bottom: 0;
-    }
+  .chatToggleButton {
+    bottom: 20px;
+    right: 20px;
+    position: fixed; /* Ensure it stays floating */
+    z-index: 1001; /* Keep button on top */
+  }
 
-    .chatToggleButton {
-        bottom: 20px;
-        right: 20px;
-        position: fixed; /* Ensure it stays floating even when window is full screen */
-    }
+  .chatControls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .modeToggle, .actionButtons {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .modeToggle .controlButton {
+    flex: 1;
+    text-align: center;
+    border-right: none;
+    border-bottom: 1px solid var(--ifm-color-emphasis-300);
+  }
+
+  .modeToggle .controlButton:last-child {
+    border-bottom: none;
+  }
+
+  .actionButtons .controlButton {
+    flex: 1;
+  }
 }
-

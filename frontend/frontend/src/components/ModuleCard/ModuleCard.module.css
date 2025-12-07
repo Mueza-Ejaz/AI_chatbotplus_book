@@ -1,8 +1,9 @@
 .moduleCard {
     background-color: var(--ifm-background-color);
+    border: 1px solid var(--ifm-color-emphasis-200); /* Subtle border */
     border-radius: 8px;
     box-shadow: var(--ifm-shadow-md);
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -10,8 +11,9 @@
 }
 
 .moduleCard:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--ifm-shadow-lg);
+    transform: translateY(-5px) scale(1.02); /* Lift and scale slightly */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+    border-color: var(--ifm-color-primary); /* Change border color on hover */
 }
 
 .cardHeader {
@@ -20,11 +22,33 @@
     padding: 15px;
     font-size: 1.2em;
     font-weight: bold;
+    display: flex; /* For icon alignment */
+    align-items: center; /* For icon alignment */
+}
+
+.cardIcon {
+    width: 30px; /* Adjust size as needed */
+    height: 30px;
+    margin-right: 10px;
+    filter: invert(1); /* Example: invert color for dark background */
+}
+
+@media screen and (max-width: 768px) {
+  .cardIcon {
+    width: 25px;
+    height: 25px;
+  }
 }
 
 .cardHeader h3 {
     color: white;
     margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .cardHeader h3 {
+    font-size: 1.1em;
+  }
 }
 
 .cardBody {
@@ -41,4 +65,16 @@
 
 .cardFooter .button {
     text-decoration: none;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
+
+.cardFooter .button--primary {
+    background-color: var(--ifm-color-primary);
+    color: white;
+}
+
+.cardFooter .button--primary:hover {
+    background-color: var(--ifm-color-primary-dark);
+    transform: translateY(-2px);
+}
+

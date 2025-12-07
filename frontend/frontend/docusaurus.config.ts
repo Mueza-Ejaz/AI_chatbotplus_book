@@ -124,7 +124,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Physical AI & Humanoid Robotics Textbook, Inc. Built with Mueza Ejaz.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Physical AI & Humanoid Robotics. Built by Mueza Ejaz`,
     },
     prism: {
       theme: prismThemes.github,
